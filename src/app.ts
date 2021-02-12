@@ -11,7 +11,6 @@ const io = new Server(server);
 
 io.on('connection',(socket) => {
   console.log('Connected');
-  socket.id = nanoid.nanoid(4)
 
   socket.on('ping', () => {
     socket.emit('pong', socket.id);
