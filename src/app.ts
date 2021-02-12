@@ -17,6 +17,10 @@ io.on('connection',(socket) => {
     socket.emit('pong', socket.id);
   });
 
+  socket.on('create', (data) => {
+  	socket.join(data)
+  })
+
   socket.on('disconnect', () => {
     console.log('Disconnected');
   });
@@ -30,6 +34,10 @@ app.disable('view cache');
 init(app).then(() => {
   console.log('Initialized app')
 });
+
+app.get('/create', (res, _) => {
+  res.redirect(301, `${nanoid.nanoid(4)}`)
+})
 
 server.listen(config.PORT, () => {
   console.log(`Running on ${config.PORT}`);
