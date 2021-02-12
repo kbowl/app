@@ -9,11 +9,12 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-io.on('connection', (socket) => {
+io.on('connection',(socket) => {
   console.log('Connected');
+  socket.id = nanoid.nanoid(4)
 
   socket.on('ping', () => {
-    socket.emit('pong');
+    socket.emit('pong', socket.id);
   });
 
   socket.on('disconnect', () => {
@@ -26,7 +27,9 @@ import init from './init';
 app.enable('trust proxy');
 app.disable('view cache');
 
-init(app);
+init(app).then(() => {
+  console.log('Initialized app')
+});
 
 server.listen(config.PORT, () => {
   console.log(`Running on ${config.PORT}`);

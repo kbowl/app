@@ -3,6 +3,6 @@ app.mount('#app')
 
 const socket = io();
 socket.emit('ping');
-socket.on('pong', () => {
-  console.log(new Date());
+socket.on('pong', (data) => {
+  console.log(data);
 });
