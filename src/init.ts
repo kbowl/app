@@ -12,7 +12,7 @@ import morgan from 'morgan';
 import api from './routes/api';
 import normal from './routes/normal';
 
-export const initializeMiddlewareAndRoutes = async (app: Express) => {
+export const init = async (app: Express) => {
   app.enable('trust proxy');
   app.disable('view cache');
 
@@ -39,4 +39,4 @@ export const initializeMiddlewareAndRoutes = async (app: Express) => {
   }
 };
 
-export default initializeMiddlewareAndRoutes;
+export default init;
