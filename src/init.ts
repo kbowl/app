@@ -1,4 +1,4 @@
-import { Express } from 'express';
+import express, { Express } from 'express';
 import { join } from 'path';
 
 // Middleware
@@ -16,7 +16,7 @@ export const init = async (app: Express) => {
   app.enable('trust proxy');
   app.disable('view cache');
 
-  app.set('view engine', 'eta');
+  app.set('view engine', 'ejs');
   app.set('views', join(__dirname, '../views'));
 
   const middlewares = [
@@ -26,6 +26,7 @@ export const init = async (app: Express) => {
     cors({ origin: '*' }),
     compression(),
     morgan('dev'),
+    express.static(join(__dirname, '../public')),
   ];
 
   const routes = [api, normal];

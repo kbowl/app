@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="./assets/lucia-icon.png" />
+    <head>
+
+    <title>Host | KBowl</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Room Code: <code l-text="mad"></code></h1>
+      <details>
+        <summary>Leaderboard</summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Score</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="team"></tbody>
+        </table>
+      </details>
+      <h3>Time: <span l-text="lol"></span></h3>
+      <details>
+        <summary>Entries</summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Time</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="entries"></tbody>
+        </table>
+      </details>
+    </div>
+    <script src="./ts/host.ts"></script>
+  </body>
+</html>

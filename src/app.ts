@@ -1,5 +1,6 @@
 import express from 'express';
 import config from './config';
+import socket from 'socket.io'
 
 import init from './init';
 
