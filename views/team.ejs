@@ -17,35 +17,26 @@
   </head>
   <body>
     <div id="app">
-      <h1>Room Code: <code l-text="mad"></code></h1>
-      <details>
-        <summary>Leaderboard</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Score</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="team"></tbody>
-        </table>
-      </details>
-      <h3>Time: <span l-text="lol"></span></h3>
-      <details>
-        <summary>Entries</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Time</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="entries"></tbody>
-        </table>
-      </details>
+      <form @submit.prevent="join()" :hidden="joined">
+        <p>Enter team name:</p>
+        <input l-model="teamName" />
+        <button>Join Team</button>
+      </form>
+
+      <div :hidden="!joined">
+        <h1 l-text="teamName"></h1>
+        <p>Ping: <kbd>0ms</kbd></p>
+        <p>Code: <kbd>AAAAA</kbd></p>
+        <button>Buzz</button>
+      </div>
     </div>
-    <script src="./ts/host.ts"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"
+      integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/lucia.min.js"></script>
+    <script src="./ts/team.js"></script>
   </body>
 </html>
