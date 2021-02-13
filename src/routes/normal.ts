@@ -10,13 +10,10 @@ export default {
       res.render('index',{ title: 'Home' });
     });
 
-    router.get('/host', (_req, res) => {
-      res.render('host', { title: 'Host' });
-    });
-
-    router.get('/team', (_req, res) => {
+    router.get('/room/:id', (req, res) => {
       res.render('team', {
-        title: 'Team'
+        title: 'Team',
+        id: req.params.id
       });
     });
 
@@ -25,11 +22,7 @@ export default {
     });
 
     router.get('/host/:id', (req, res) => {
-      res.render('host', { id: req.params.id });
-    });
-
-    router.get('/host', (_req, res) => {
-      res.render('host');
+      res.render('host', { title: 'Host', id: req.params.id });
     });
 
     router.get('/team', (_req, res) => {

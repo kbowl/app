@@ -4,6 +4,10 @@
 
   <body>
     <div id="app">
+      <div l-for="test in tests">
+        <p l-text="this.test"></p>
+      </div>
+
       <h1>Room Code: <code l-text="mad"></code></h1>
       <details>
         <summary>Leaderboard</summary>
@@ -35,13 +39,24 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="entries"></tbody>
+          <tbody l-for="entry in entries">
+            <tr>
+              <td l-text="this.entry.teamName"></td>
+              <td l-text="this.entry.date"></td>
+            </tr>
+          </tbody>
         </table>
       </details>
     </div>
     <script>
       const id = '<%= id %>';
     </script>
-    <script src="./js/host.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"
+      integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/lucia.min.js"></script>
+    <script src="/js/host.js"></script>
   </body>
 </html>
