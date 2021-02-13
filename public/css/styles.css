@@ -1,3 +1,15 @@
+.agreement {
+    margin: 20px 0 20px 0;
+}
+
+.join {
+    margin: 20px 0 20px 0;
+}
+
+.check-label {
+    font-weight: bold;
+}
+
 /* [l-mask] {
   display: none;
 }
