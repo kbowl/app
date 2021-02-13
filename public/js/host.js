@@ -1,5 +1,14 @@
 // (() => {
-const app = Lucia.component({ id, teams: [], leaderboard: [], entries: [] });
+const app = Lucia.component({
+  id,
+  teams: [],
+  leaderboard: [],
+  entries: [],
+  score(num, i) {
+    console.log(num);
+    this.entries.splice(i, 1);
+  },
+});
 app.mount('#app');
 
 const socket = io();
