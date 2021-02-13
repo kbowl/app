@@ -15,7 +15,7 @@
       <div :hidden="!joined">
         <h1 l-text="teamName"></h1>
         <p>Ping: <kbd>0ms</kbd></p>
-        <p>Code: <kbd>AAAAA</kbd></p>
+        <p>Code: <kbd l-text="id"></kbd></p>
         <button @click="buzz()">Buzz</button>
       </div>
     </div>

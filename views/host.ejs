@@ -6,7 +6,7 @@
     <div id="app">
       <%- include('./partials/header.ejs') %>
       <h1>Room Code: <kbd l-text="id"></kbd></h1>
-      <details>
+      <details open>
         <summary>Leaderboard</summary>
         <table>
           <thead>
@@ -20,13 +20,25 @@
             <tr>
               <td l-text="this.team[0]"></td>
               <td l-text="this.team[1]"></td>
-              <td><button>Edit</button> <button>Delete</button></td>
+              <td>
+                <button @click="
+                  const u = prompt('Enter new value');
+                  if (isNaN(u)) {
+                    alert('Please enter a valid number ):')
+                  } else {
+                    this.team[1] = u;
+                    globalApp.render()
+                  }">
+                  Edit
+                </button>
+                <button>Delete</button>
+              </td>
             </tr>
           </tbody>
         </table>
       </details>
-      <h3>Time: <span l-text="timer"></span></h3>
-      <details>
+      <h3>Time: <span l-text="(timer === -1) ? 'N/A' : (timer + ' s')"></span></h3>
+      <details open>
         <summary>Entries</summary>
         <table>
           <thead>
