@@ -10,14 +10,15 @@
         <button @click="step = 1">I am a participant</button>
         <button @click="step = 2">I am a host</button>
       </div>
-      <div l-if="step === 1">
+      <div class="join" l-if="step === 1">
         <input l-model="code" />
         <button @click="location = '/room/' + code">Join Room</button>
       </div>
       <div l-if="step === 2">
-        <p>
-          <input type="checkbox" l-model="checked" /> I am a teacher or an assigned host and I agree
-          by checking this box I am using this for a competition.
+        <p class="agreement">
+          <input type="checkbox" l-model="checked" id="check" class="check" />
+          <label class="check-label" for="check">I am a teacher or an assigned host and I agree
+          by checking this box I am using this for a competition.</label>
         </p>
         <button :disabled="!checked" @click="location = '/host'">Create Room</button>
       </div>
