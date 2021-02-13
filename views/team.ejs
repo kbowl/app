@@ -1,20 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/head.ejs') %>
 
-    <link rel="icon" type="image/png" href="./assets/lucia-icon.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/open-fonts@1.1.1/fonts/inter.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Host | KBowl</title>
-  </head>
   <body>
     <div id="app">
       <form @submit.prevent="join()" :hidden="joined">

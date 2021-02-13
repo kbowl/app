@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/open-fonts@1.1.1/fonts/inter.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-  </head>
+  <%- include('./partials/head.ejs') %>
 
   <body>
     <header>
@@ -31,7 +22,7 @@
           <input type="checkbox" l-model="checked" /> I am a teacher or an assigned host and I agree
           by checking this box I am using this for a competition.
         </p>
-        <button :disabled="!checked" @click="location = '/create'">Create Room</button>
+        <button :disabled="!checked" @click="location = '/host'">Create Room</button>
       </div>
     </div>
 
