@@ -70,8 +70,25 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('disconnect', () => {
-    console.log('Disconnected');
+  socket.on('disconnect', data => {
+    state.forEach((value, key) => {
+      if (value.host === socket.id) {
+        io.to(key).emit('quit')
+        state.delete(key)
+      } else {
+      	console.log(value)
+        for (const team of value.teams) {
+          console.log(team)
+        }
+        // let new_arr = []
+      	// for (const team of value.teams) {
+      	//   new_arr = team.members.filter(a => a !== socket.id)
+        // }
+      	//
+      }
+
+    })
+    console.log(`Disconnected: ${data}`);
   });
 });
 

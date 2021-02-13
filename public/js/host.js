@@ -5,6 +5,7 @@ const app = Lucia.component({
   leaderboard: [],
   entries: [],
   timer: 15,
+  countdown: `15:00`,
   score(num, i) {
     const { teamName } = this.entries[i];
     const team = this.teams.filter((t) => t[0] === teamName);
