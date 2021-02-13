@@ -13,7 +13,7 @@ let globalApp;
 
       for (let i = 0; i < this.leaderboard.length; i++) {
         if (this.leaderboard[i][0] === teamName) {
-          this.leaderboard[i][1] = 1;
+          this.leaderboard[i][1]++;
           console.log(this.leaderboard[i][1]);
           score = i;
           app.render();

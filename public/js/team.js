@@ -1,8 +1,11 @@
 const socket = io();
 
+
 const app = Lucia.component({
   teamName: '',
   joined: false,
+  ping: 0,
+  score: 0,
   join() {
     if (this.teamName.trim() === '') return alert('Please enter a valid team name');
     this.joined = true;
@@ -21,4 +24,14 @@ document.addEventListener('visibilitychange', () => {
   } else {
     console.log('tab is inactive');
   }
+});
+
+
+socket.emit('ping', Date.now());
+socket.on('pong', (data) => {
+  app.state.ping = parseInt(data);
+});
+socket.on('score', (data) => {
+  if (teamName !== data.teamName) return;
+  app.state.score = parseInt(data.score);
 });

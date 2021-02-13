@@ -31,7 +31,16 @@
                   }">
                   Edit
                 </button>
-                <button>Delete</button>
+                 
+                <button @click="
+                const p = confirm(`Are you sure you want to remove the team, ${this.team[0]}, permanently from the session? This is  irreversabl.`e;
+                if(p === true){
+                  let i = leaderboard.indexOf(this.team);
+                  leaderboard.splice(i, 1);
+                } else {
+                  alert('Alright, the removal process was cancelled.')
+                }
+                ">Remove</button>
               </td>
             </tr>
           </tbody>
@@ -72,4 +81,3 @@
     <script src="/js/lucia.min.js"></script>
     <script src="/js/host.js"></script>
   </body>
-</html>
