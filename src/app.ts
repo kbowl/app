@@ -5,19 +5,61 @@ import { createServer } from 'http';
 
 const app = express();
 
+let state = new Map();
+
 const server = createServer(app);
 const io = new Server(server);
 
-io.on('connection',(socket) => {
+io.on('connection', (socket) => {
   console.log('Connected');
 
   socket.on('ping', () => {
     socket.emit('pong', socket.id);
   });
 
-  socket.on('create', (data) => {
-  	socket.join(data)
-  })
+  socket.on('create', (id) => {
+    if (state.has(id)) {
+      io.emit('create', false);
+    } else {
+      socket.join(id);
+      state.set(id, {
+        host: socket.id,
+        teams: [],
+      });
+      io.emit('create', true);
+    }
+  });
+
+  socket.on('join', ({ id, teamName }) => {
+    if (state.has(id)) {
+      const room = state.get(id);
+      const team = room.teams.filter(({ name }) => teamName.trim() === name);
+
+      if (team.length !== 0) {
+        if (!team[0].members.includes(socket.id)) team[0].members.push(socket.id);
+      } else {
+        room.teams.push({
+          name: teamName,
+          members: [socket.id],
+        });
+      }
+
+      socket.join(id);
+
+      io.to(id).emit('join', teamName);
+    }
+  });
+
+  socket.on('buzz', ({ id, teamName }) => {
+    if (state.has(id)) {
+      const team = state.get(id).teams.filter(({ name }) => teamName.trim() === name);
+      if (team.length > 0) {
+        if (team[0].members.includes(socket.id)) {
+          socket.to(id).emit('buzz', teamName);
+        }
+      }
+    }
+  });
 
   socket.on('disconnect', () => {
     console.log('Disconnected');
@@ -30,7 +72,7 @@ app.enable('trust proxy');
 app.disable('view cache');
 
 init(app).then(() => {
-  console.log('Initialized app')
+  console.log('Initialized app');
 });
 
 server.listen(config.PORT, () => {

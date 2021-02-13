@@ -16,10 +16,10 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="team">
+          <tbody l-for="team in leaderboard">
             <tr>
-              <td>lol</td>
-              <td>lol</td>
+              <td l-text="this.team[0]"></td>
+              <td l-text="this.team[1]"></td>
               <td><button>Edit</button><button>Delete</button></td>
             </tr>
           </tbody>
@@ -36,11 +36,25 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="entries"></tbody>
+          <tbody l-for="entry in entries">
+            <tr>
+              <td l-text="this.entry.teamName"></td>
+              <td l-text="this.entry.date"></td>
+              <td><button>True</button> <button>False</button></td>
+            </tr>
+          </tbody>
         </table>
       </details>
     </div>
-
-    <script src="./js/host.js"></script>
+    <script>
+      const id = '<%= id %>';
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"
+      integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/lucia.min.js"></script>
+    <script src="/js/host.js"></script>
   </body>
 </html>

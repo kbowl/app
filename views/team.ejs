@@ -16,16 +16,19 @@
         <h1 l-text="teamName"></h1>
         <p>Ping: <kbd>0ms</kbd></p>
         <p>Code: <kbd>AAAAA</kbd></p>
-        <button>Buzz</button>
+        <button @click="buzz()">Buzz</button>
       </div>
     </div>
 
+    <script>
+      const id = '<%= id %>';
+    </script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"
       integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA=="
       crossorigin="anonymous"
     ></script>
     <script src="/js/lucia.min.js"></script>
-    <script src="./ts/team.js"></script>
+    <script src="/js/team.js"></script>
   </body>
 </html>
