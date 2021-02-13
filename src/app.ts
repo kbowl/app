@@ -61,6 +61,15 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('score', ({ id, score, teamName }) => {
+    if (state.has(id)) {
+      const { host } = state.get(id);
+      if (host === socket.id) {
+        socket.to(id).emit('score', { id, score, teamName });
+      }
+    }
+  });
+
   socket.on('disconnect', () => {
     console.log('Disconnected');
   });
