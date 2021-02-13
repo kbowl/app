@@ -45,6 +45,8 @@ io.on('connection', (socket) => {
       }
 
       socket.join(id);
+
+      io.to(id).emit('join', teamName);
     }
   });
 

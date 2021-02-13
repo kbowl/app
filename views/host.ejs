@@ -4,10 +4,6 @@
 
   <body>
     <div id="app">
-      <div l-for="test in tests">
-        <p l-text="this.test"></p>
-      </div>
-
       <h1>Room Code: <code l-text="mad"></code></h1>
       <details>
         <summary>Leaderboard</summary>
@@ -19,10 +15,10 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="team">
+          <tbody l-for="team in leaderboard">
             <tr>
-              <td>lol</td>
-              <td>lol</td>
+              <td l-text="this.team[0]"></td>
+              <td l-text="this.team[1]"></td>
               <td><button>Edit</button><button>Delete</button></td>
             </tr>
           </tbody>
@@ -43,6 +39,7 @@
             <tr>
               <td l-text="this.entry.teamName"></td>
               <td l-text="this.entry.date"></td>
+              <td><button>True</button> <button>False</button></td>
             </tr>
           </tbody>
         </table>
