@@ -1,51 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/head.ejs') %>
 
-    <link rel="icon" type="image/png" href="./assets/lucia-icon.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/open-fonts@1.1.1/fonts/inter.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Host | KBowl</title>
-  </head>
   <body>
     <div id="app">
-      <h1>Room Code: <code l-text="mad"></code></h1>
-      <details>
-        <summary>Leaderboard</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Score</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="team"></tbody>
-        </table>
-      </details>
-      <h3>Time: <span l-text="lol"></span></h3>
-      <details>
-        <summary>Entries</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Time</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="entries"></tbody>
-        </table>
-      </details>
+      <form @submit.prevent="join()" :hidden="joined">
+        <p>Enter team name:</p>
+        <input l-model="teamName" />
+        <button>Join Team</button>
+      </form>
+
+      <div :hidden="!joined">
+        <h1 l-text="teamName"></h1>
+        <p>Ping: <kbd>0ms</kbd></p>
+        <p>Code: <kbd>AAAAA</kbd></p>
+        <button>Buzz</button>
+      </div>
     </div>
-    <script src="./ts/host.ts"></script>
   </body>
 </html>
