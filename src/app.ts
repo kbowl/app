@@ -5,6 +5,8 @@ import { createServer } from 'http';
 
 const app = express();
 
+let state = new Map;
+
 const server = createServer(app);
 const io = new Server(server);
 
@@ -16,7 +18,12 @@ io.on('connection',(socket) => {
   });
 
   socket.on('create', (data) => {
-  	socket.join(data)
+	  if (state.has(data)) return;
+    socket.join(data)
+    state.set(data, [{
+      host: socket,
+      teams: [{}]
+    }])
   })
 
   socket.on('disconnect', () => {
