@@ -4,6 +4,7 @@
 
   <body>
     <div id="app">
+      <%- include('./partials/header.ejs') %>
       <h1>Room Code: <code l-text="mad"></code></h1>
       <details>
         <summary>Leaderboard</summary>
@@ -39,9 +40,7 @@
         </table>
       </details>
     </div>
-    <script>
-      const id = '<%= id %>';
-    </script>
+
     <script src="./js/host.js"></script>
   </body>
 </html>

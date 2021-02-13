@@ -3,6 +3,8 @@
   <%- include('./partials/head.ejs') %>
 
   <body>
+    <%- include('./partials/header.ejs') %>
+
     <div id="app">
       <form @submit.prevent="join()" :hidden="joined">
         <p>Enter team name:</p>
