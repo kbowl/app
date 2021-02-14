@@ -2,73 +2,129 @@
 <html lang="en">
   <%- include('./partials/head.ejs') %>
 
-  <body>
+  <body class="font-sans">
     <div id="app">
-      <%- include('./partials/header.ejs') %>
-      <h1>Room Code: <kbd l-text="id"></kbd></h1>
-      <details open>
-        <summary>Leaderboard</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Score</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody l-for="team in leaderboard">
-            <tr>
-              <td l-text="this.team[0]"></td>
-              <td l-text="this.team[1]"></td>
-              <td>
-                <button @click="
-                  const u = prompt('Enter new value');
-                  if (isNaN(u)) {
-                    alert('Please enter a valid number ):')
-                  } else {
-                    this.team[1] = u;
-                    globalApp.render()
-                  }">
-                  Edit
-                </button>
-                 
-                <button @click="
-                const p = confirm(`Are you sure you want to remove the team, ${this.team[0]}, permanently from the session? This is  irreversabl.`e;
-                if(p === true){
-                  let i = leaderboard.indexOf(this.team);
-                  leaderboard.splice(i, 1);
-                } else {
-                  alert('Alright, the removal process was cancelled.')
-                }
-                ">Remove</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
-      <h3>Time: <span l-text="(timer === -1) ? 'N/A' : (timer + ' s')"></span></h3>
-      <details open>
-        <summary>Entries</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Time</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody l-for="(entry, i) in entries">
-            <tr>
-              <td l-text="this.entry.teamName"></td>
-              <td l-text="this.entry.date"></td>
-              <td>
-                <button @click="score(1, this.i)">True</button>
-                <button @click="score(0, this.i)">False</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
+      <div class="my-10 text-5xl text-center">
+        <h1 class="font-extrabold">
+          Room Code:
+          <span class="bg-gray-100 px-3 py-2 mt-4 rounded-md font-semibold" l-text="id"></span>
+        </h1>
+      </div>
+      <div class="w-3/5 mx-auto">
+        <h2 class="text-center font-bold text-3xl mb-6">
+          Time: <span l-text="(timer === -1) ? 'N/A' : (timer + ' s')"></span>
+        </h2>
+
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold mb-3">Leaderboard</h2>
+          <table class="min-w-full divide-y divide-gray-200 shadow sm:rounded-lg">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Score
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" l-for="team in leaderboard">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap" l-text="this.team[0]"></td>
+                <td class="px-6 py-4 whitespace-nowrap" l-text="this.team[1]"></td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <button
+                    class="bg-gray-100 text-gray-700 text-base font-semibold px-6 py-2 rounded-lg"
+                    @click="
+                    const u = prompt('Enter new value');
+                    if (isNaN(u)) {
+                      alert('Please enter a valid number ):')
+                      globalApp.render()
+                    } else {
+                      this.team[1] = u;
+                      globalApp.render()
+                      globalApp.socket.emit('score', { id, teamName: this.team[0], score: u });
+                    }"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="bg-red-100 text-red-700 text-base font-semibold px-6 py-2 rounded-lg"
+                    @click="const p = confirm(`Are you sure you want to remove the team, ${this.team[0]}, permanently from the session? This is irreversable.`);
+                    if(p === true){
+                      let i = leaderboard.indexOf(this.team);
+                      leaderboard.splice(i, 1);
+                    } else {
+                      alert('Alright, the removal process was cancelled.')
+                    }"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold mb-3">Entries</h2>
+          <table class="min-w-full divide-y divide-gray-200 shadow sm:rounded-lg">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Time
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody l-for="(entry, i) in entries">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap" l-text="this.entry.teamName"></td>
+                <td class="px-6 py-4 whitespace-nowrap" l-text="this.entry.date"></td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <button
+                    class="bg-green-100 text-green-700 text-base font-semibold px-6 py-2 rounded-lg"
+                    @click="score(1, this.i)"
+                  >
+                    True
+                  </button>
+                  <button
+                    class="bg-red-100 text-red-700 text-base font-semibold px-6 py-2 rounded-lg"
+                    @click="score(0, this.i)"
+                  >
+                    False
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <script>
       const id = '<%= id %>';
@@ -80,4 +136,6 @@
     ></script>
     <script src="/js/lucia.min.js"></script>
     <script src="/js/host.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
   </body>
+</html>

@@ -2,22 +2,65 @@
 <html lang="en">
   <%- include('./partials/head.ejs') %>
 
-  <body>
-    <%- include('./partials/header.ejs') %>
-
+  <body class="font-sans">
     <div id="app">
-      <form @submit.prevent="join()" :hidden="joined">
-        <p>Enter team name:</p>
-        <input l-model="teamName" />
-        <button>Join Team</button>
-      </form>
-
-      <div :hidden="!joined">
-        <h1 l-text="teamName"></h1>
-        <p>Score: <kbd l-text="score || 0">0</kbd></p>
-        <p>Ping: <kbd l-text="ping + ' ms'">0 ms</kbd></p>
-        <p>Code: <kbd l-text="id"></kbd></p>
-        <button @click="buzz()">Buzz</button>
+      <div class="w-full flex flex-col h-screen">
+        <nav class="bg-gray-800" :hidden="!joined">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center space-x-10 h-16">
+              <div class="flex-shrink-0">
+                <h1 class="text-white text-base font-bold">
+                  Room Code:
+                  <span
+                    class="bg-gray-900 px-3 py-2 mt-4 rounded-md font-medium"
+                    l-text="id"
+                  ></span>
+                </h1>
+              </div>
+              <div class="flex-shrink-0">
+                <h1 class="text-white text-base font-bold">
+                  Ping:
+                  <span class="bg-gray-900 px-3 py-2 mt-4 rounded-md font-medium" l-text="ping + ' ms'"></span>
+                </h1>
+              </div>
+              <div class="flex-shrink-0">
+                <h1 class="text-white text-base font-bold">
+                  Score:
+                  <span class="bg-gray-900 px-3 py-2 mt-4 rounded-md font-medium" l-text="score || 0"></span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="m-auto">
+          <header class="text-center" :hidden="joined">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900">
+              <span>KBowl</span>
+            </h1>
+            <p class="sm:text-lg sm:leading-snug font-semibold tracking-wide text-gray-500">
+              Virtual Knowledge Bowl
+            </p>
+          </header>
+          <form class="mt-6" @submit.prevent="join()" :hidden="joined">
+            <input
+              l-model="teamName"
+              placeholder="Team Name"
+              class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none text-base text-black placeholder-gray-500 border border-gray-200 rounded-md px-6 py-2"
+            />
+            <button class="bg-blue-100 text-blue-700 text-base font-semibold px-6 py-2 rounded-lg">
+              Join Team
+            </button>
+          </form>
+          <div :hidden="!joined" class="text-center space-y-6">
+            <h1 class="text-5xl font-extrabold" l-text="teamName"></h1>
+            <button
+              @click="buzz()"
+              class="bg-blue-100 text-blue-700 text-3xl font-semibold px-12 py-4 rounded-lg"
+            >
+              Buzz
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -29,6 +72,7 @@
       integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA=="
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="/js/lucia.min.js"></script>
     <script src="/js/team.js"></script>
   </body>
