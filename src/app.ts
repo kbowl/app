@@ -34,7 +34,6 @@ io.on('connection', (socket) => {
     if (state.has(id)) {
       const room = state.get(id);
       const team = room.teams.filter(({ name }) => teamName.trim() === name);
-
       if (team.length !== 0) {
         if (!team[0].members.includes(socket.id)) team[0].members.push(socket.id);
       } else {
@@ -70,24 +69,23 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('disconnect', data => {
+  socket.on('disconnect', (data) => {
     state.forEach((value, key) => {
       if (value.host === socket.id) {
-        io.to(key).emit('quit')
-        state.delete(key)
+        io.to(key).emit('quit');
+        state.delete(key);
       } else {
-      	console.log(value)
+        console.log(value);
         for (const team of value.teams) {
-          console.log(team)
+          console.log(team);
         }
         // let new_arr = []
-      	// for (const team of value.teams) {
-      	//   new_arr = team.members.filter(a => a !== socket.id)
+        // for (const team of value.teams) {
+        //   new_arr = team.members.filter(a => a !== socket.id)
         // }
-      	//
+        //
       }
-
-    })
+    });
     console.log(`Disconnected: ${data}`);
   });
 });

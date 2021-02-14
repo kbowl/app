@@ -2,24 +2,69 @@
 <html lang="en">
   <%- include('./partials/head.ejs') %>
 
-  <body>
-    <%- include('./partials/header.ejs') %>
-
+  <body class="font-sans">
     <div id="app">
-      <div>
-        <button @click="step = 1">I am a participant</button>
-        <button @click="step = 2">I am a host</button>
-      </div>
-      <div l-if="step === 1">
-        <input l-model="code" />
-        <button @click="location = '/room/' + code">Join Room</button>
-      </div>
-      <div l-if="step === 2">
-        <p>
-          <input type="checkbox" l-model="checked" /> I am a teacher or an assigned host and I agree
-          by checking this box I am using this for a competition.
-        </p>
-        <button :disabled="!checked" @click="location = '/host'">Create Room</button>
+      <div class="w-full flex h-screen">
+        <div class="m-auto">
+          <header class="text-center">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900">
+              <span>KBowl</span>
+            </h1>
+            <p class="sm:text-lg sm:leading-snug font-semibold tracking-wide text-gray-500">
+              Virtual Knowledge Bowl
+            </p>
+          </header>
+          
+
+          <div l-if="step === 0" class="mt-6">
+            <button
+              @click="step = 1"
+              class="bg-gray-100 text-gray-700 text-base font-semibold px-6 py-2 rounded-lg"
+            >
+              Join Room
+            </button>
+            <button
+              @click="location = '/host'"
+              class="bg-blue-100 text-blue-700 text-base font-semibold px-6 py-2 rounded-lg"
+            >
+              Create Room
+            </button>
+          </div>
+          <div l-if="step === 1" class="flex flex-col">
+            <div class="mt-6 mb-6">
+              <input
+              l-model="code"
+              placeholder="Room Code"
+              class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none text-base text-black placeholder-gray-500 border border-gray-200 rounded-md px-6 py-2"
+            />
+            <button
+              @click="location = '/room/' + code"
+              class="bg-blue-100 text-blue-700 text-base font-semibold px-6 py-2 rounded-lg"
+            >
+              Join Room
+            </button>
+            </div>
+            <div class="text-center">
+              <button @click="step = 0">
+                <ion-icon name="arrow-back-circle" class="text-4xl text-gray-900"></ion-icon>
+              </button>
+            </div>
+
+          </div>
+          <!-- <div l-if="step === 2">
+            <p>
+              <input type="checkbox" l-model="checked" /> I am a teacher or an assigned host and I
+              agree by checking this box I am using this for a competition.
+            </p>
+            <button
+              :disabled="!checked"
+              @click="location = '/host'"
+              class="bg-blue-100 text-blue-700 text-base font-semibold px-6 py-2 rounded-lg"
+            >
+              Create Room
+            </button> -->
+          </div>
+        </div>
       </div>
     </div>
 
@@ -28,6 +73,7 @@
       integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA=="
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="/js/lucia.min.js"></script>
     <script src="/js/index.js"></script>
   </body>
