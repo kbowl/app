@@ -32,12 +32,8 @@ socket.on('pong', (data) => {
   app.state.ping = parseInt(data);
 });
 
-socket.on('score', (data) => {
-  if (app.state.teamName !== data.teamName) return;
-  app.state.score += parseInt(data.score);
-});
-
-socket.on('hostChange', (data) => {
-  if (app.state.teamName !== data.teamName) return;
-  app.state.score = parseInt(data.score);
+socket.on('score', ({id, teamName, score}) => {
+  console.log(score)
+  if (app.state.teamName !== teamName) return;
+  app.state.score += parseInt(score);
 });

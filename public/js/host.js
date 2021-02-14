@@ -9,27 +9,38 @@ let globalApp;
     score(num, i) {
       const { teamName } = this.entries[i];
 
+      if (i === -1) {
+        socket.emit('score', { id, teamName: teamName, score: -1 });
+        return
+      }
+
       let score;
 
       console.log(this.leaderboard);
 
-      // this.leaderboard.forEach(i => {
-      //   if(i.teamName === teamName){
-      //     score = ++i.score;
-      //     // wait why is this `= ++team.score?`
-      //   }
-      // })
+      this.entries.forEach(i => {
+        if(i.teamName === teamName){
+          console.log(score)
+          if (i.score) {
+            score = i.score + num;
+          } else {
+            score = num
+          }
+          console.log(score)
+        }
+      })
+      console.log({ id, teamName: teamName, score: score })
 
       this.timer = this.entries.length > 1 ? 15 : -1;
 
       if (num === 1) {
-        socket.emit('score', { id, teamName: teamName, score });
+        socket.emit('score', { id, teamName: teamName, score: score });
         console.log(score);
         this.entries = [];
         this.timer = -1;
         for (let i = 0; i < this.leaderboard.length; i++) {
           if (this.leaderboard[i][0] === teamName) {
-            this.leaderboard[i][1] = this.leaderboard[i][1] + 1;
+            this.leaderboard[i][1] = this.leaderboard[i][1] + num;
             score = i;
             app.render();
             break;

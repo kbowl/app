@@ -46,24 +46,6 @@
                 <td class="px-6 py-4 whitespace-nowrap" l-text="this.team[1]"></td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <button
-                    class="bg-gray-100 text-gray-700 text-base font-semibold px-6 py-2 rounded-lg"
-                    @click="
-                    const u = prompt('Enter new value');
-                    if (isNaN(u)) {
-                      alert('Please enter a valid number ):')
-                      globalApp.render()
-                    } else if (u === null) {
-                      return;
-                    }
-                    else {
-                      this.team[1] = u;
-                      globalApp.render()
-                      globalApp.socket.emit('hostChange', { id, teamName: this.team[0], score: u });
-                    }"
-                  >
-                    Edit
-                  </button>
-                  <button
                     class="bg-red-100 text-red-700 text-base font-semibold px-6 py-2 rounded-lg"
                     @click="const p = confirm(`Are you sure you want to remove the team, ${this.team[0]}, permanently from the session? This is irreversable.`);
                     if(p === true){
@@ -118,7 +100,7 @@
                   </button>
                   <button
                     class="bg-red-100 text-red-700 text-base font-semibold px-6 py-2 rounded-lg"
-                    @click="score(0, this.i)"
+                    @click="score(-1, this.i)"
                   >
                     False
                   </button>
