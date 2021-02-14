@@ -19,7 +19,7 @@ const app = Lucia.component({
 app.mount('#app');
 
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState == 'visible') {
+  if (document.visibilityState === 'visible') {
     console.log('tab is activate');
   } else {
     console.log('tab is inactive');
@@ -31,7 +31,8 @@ socket.emit('ping', Date.now());
 socket.on('pong', (data) => {
   app.state.ping = parseInt(data);
 });
+
 socket.on('score', (data) => {
-  if (teamName !== data.teamName) return;
+  if (app.state.teamName !== data.teamName) return;
   app.state.score = parseInt(data.score);
 });

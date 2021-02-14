@@ -48,6 +48,8 @@ let globalApp;
   const socket = io();
   socket.emit('create', id);
 
+  app.socket = socket
+
   socket.once('create', (success) => {
     if (!success) location = `/`;
   });
