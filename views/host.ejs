@@ -52,7 +52,10 @@
                     if (isNaN(u)) {
                       alert('Please enter a valid number ):')
                       globalApp.render()
-                    } else {
+                    } else if (u === null) {
+                      return;
+                    }
+                    else {
                       this.team[1] = u;
                       globalApp.render()
                       globalApp.socket.emit('hostChange', { id, teamName: this.team[0], score: u });
