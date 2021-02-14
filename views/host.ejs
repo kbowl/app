@@ -11,7 +11,9 @@
         </h1>
       </div>
       <div class="w-3/5 mx-auto">
-        <h2 class="text-center font-bold text-3xl mb-6">Time: <span l-text="timer"></span>s</h2>
+        <h2 class="text-center font-bold text-3xl mb-6">
+          Time: <span l-text="(timer === -1) ? 'N/A' : (timer + ' s')"></span>
+        </h2>
 
         <div class="mb-12">
           <h2 class="text-2xl font-bold mb-3">Leaderboard</h2>
@@ -45,13 +47,28 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   <button
                     class="bg-gray-100 text-gray-700 text-base font-semibold px-6 py-2 rounded-lg"
+                    @click="
+                    const u = prompt('Enter new value');
+                    if (isNaN(u)) {
+                      alert('Please enter a valid number ):')
+                    } else {
+                      this.team[1] = u;
+                      globalApp.render()
+                    }"
                   >
                     Edit
                   </button>
                   <button
                     class="bg-red-100 text-red-700 text-base font-semibold px-6 py-2 rounded-lg"
+                    @click="const p = confirm(`Are you sure you want to remove the team, ${this.team[0]}, permanently from the session? This is  irreversabl.`e;
+                    if(p === true){
+                      let i = leaderboard.indexOf(this.team);
+                      leaderboard.splice(i, 1);
+                    } else {
+                      alert('Alright, the removal process was cancelled.')
+                    }"
                   >
-                    Delete
+                    Remove
                   </button>
                 </td>
               </tr>

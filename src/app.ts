@@ -13,8 +13,8 @@ const io = new Server(server);
 io.on('connection', (socket) => {
   console.log('Connected');
 
-  socket.on('ping', () => {
-    socket.emit('pong', socket.id);
+  socket.on('ping', (data) => {
+    socket.emit('pong', Math.abs(Date.now() - parseInt(data)));
   });
 
   socket.on('create', (id) => {
