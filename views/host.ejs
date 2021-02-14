@@ -55,7 +55,7 @@
                     } else {
                       this.team[1] = u;
                       globalApp.render()
-                      globalApp.socket.emit('score', { id, teamName: this.team[0], score: u });
+                      globalApp.socket.emit('hostChange', { id, teamName: this.team[0], score: u });
                     }"
                   >
                     Edit
