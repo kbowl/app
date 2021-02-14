@@ -11,16 +11,6 @@ let globalApp;
 
       let score;
 
-      for (let i = 0; i < this.leaderboard.length; i++) {
-        if (this.leaderboard[i][0] === teamName) {
-          this.leaderboard[i][1]++;
-          console.log(this.leaderboard[i][1]);
-          score = i;
-          app.render();
-          break;
-        }
-      }
-
       console.log(this.leaderboard);
 
       // this.leaderboard.forEach(i => {
@@ -37,6 +27,14 @@ let globalApp;
         console.log(score);
         this.entries = [];
         this.timer = -1;
+        for (let i = 0; i < this.leaderboard.length; i++) {
+          if (this.leaderboard[i][0] === teamName) {
+            this.leaderboard[i][1] = this.leaderboard[i][1] + 1;
+            score = i;
+            app.render();
+            break;
+          }
+        }
       } else {
         this.entries.splice(i, 1);
       }
